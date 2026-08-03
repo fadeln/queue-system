@@ -70,7 +70,7 @@ class QueueController extends Controller
             $current = QueueEntry::current();
 
             if ($current !== null) {
-                $current->update(['status' => QueueEntry::STATUS_CALLED]);
+                $current->update(['status' => QueueEntry::STATUS_PENDING]);
             }
 
             $previous = QueueEntry::where('status', QueueEntry::STATUS_CALLED)
@@ -79,7 +79,10 @@ class QueueController extends Controller
                 ->first();
 
             if ($previous !== null) {
-                $previous->update(['status' => QueueEntry::STATUS_CALLING]);
+                $previous->update([
+                    'status' => QueueEntry::STATUS_CALLING,
+                    'served_at' => null,
+                ]);
             }
         });
 

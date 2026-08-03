@@ -110,7 +110,18 @@ class QueueTest extends TestCase
 
         $this->assertSame('A-001', QueueEntry::current()?->code);
         $this->assertSame(QueueEntry::STATUS_CALLING, QueueEntry::where('code', 'A-001')->value('status'));
-        $this->assertSame(QueueEntry::STATUS_CALLED, QueueEntry::where('code', 'A-002')->value('status'));
+        $this->assertSame(QueueEntry::STATUS_PENDING, QueueEntry::where('code', 'A-002')->value('status'));
+        $this->assertNull(QueueEntry::where('code', 'A-001')->value('served_at'));
+    }
+
+    public function test_prev_at_start_keeps_the_queue_alive(): void
+    {
+        $this->actingAs($this->admin)->post('/admin/queue/next'); // A-001 calling
+
+        $this->actingAs($this->admin)->post('/admin/queue/prev');
+
+        $this->assertSame(QueueEntry::STATUS_PENDING, QueueEntry::where('code', 'A-001')->value('status'));
+        $this->assertNull(QueueEntry::current());
     }
 
     public function test_mark_called_completes_a_pending_entry(): void
