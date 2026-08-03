@@ -57,6 +57,6 @@ Legend: [ ] pending  [~] in progress  [x] done
 - [x] 6.6 Tests: 6/6 QueueCrudTest; full suite 53/53; Pint + tsc clean
 
 ## Phase 7 — Documentation polish
-- [~] 7.1 Move TODOLIST.md to docs/TODOLIST.md; update README link
-- [~] 7.2 Add docs/roadmap.md (English, hospital roadmap A-E)
-- [~] 7.3 Initial git commit (single baseline commit, English conventional message)
+- [x] 7.1 Move TODOLIST.md to docs/TODOLIST.md; update README link
+- [x] 7.2 Add docs/roadmap.md (English, hospital roadmap A-E)
+- [x] 7.3 Initial git commit (single baseline commit, English conventional message)
